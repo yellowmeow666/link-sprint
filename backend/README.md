@@ -64,4 +64,4 @@ const app = createApp({
 });
 ```
 
-`createApp` 不监听端口，监听在 `src/server.ts`。撞码最多尝试 5 次，仍冲突返回 500 `INTERNAL`。
+`createApp` 不监听端口，监听在 `src/server.ts`。撞码时首次尝试 1 次、再最多重试 5 次（共调用 `generateCode` 至多 6 次），6 次全冲突返回 500 `INTERNAL`。

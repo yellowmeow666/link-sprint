@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
 import type { Express } from 'express';
-import { createApp, MAX_CODE_ATTEMPTS } from '../src/app.js';
+import { createApp } from '../src/app.js';
 import { openDb, type Db } from '../src/db.js';
 import { generateCode, CODE_PATTERN } from '../src/code.js';
 
@@ -95,6 +95,17 @@ describe('POST /api/links', () => {
     expect(res.body.error.code).toBe('MISSING_CLIENT_ID');
   });
 
+  it('succeeds when only the 6th code (5th retry) is free', async () => {
+    db.prepare("INSERT INTO links (code, url, client_id, created_at) VALUES ('DDDDDDD','https://x.example','x','2026-01-01T00:00:00.000Z')").run();
+    const seq = ['DDDDDDD', 'DDDDDDD', 'DDDDDDD', 'DDDDDDD', 'DDDDDDD', 'EEEEEEE'];
+    let calls = 0;
+    app = createApp({ db, publicBaseUrl: BASE, generateCode: () => (calls++, seq.shift()!) });
+    const res = await create('https://b.example');
+    expect(res.status).toBe(201);
+    expect(res.body.code).toBe('EEEEEEE');
+    expect(calls).toBe(6);
+  });
+
   it('retries on code collision and succeeds', async () => {
     const seq = ['AAAAAAA', 'AAAAAAA', 'BBBBBBB'];
     app = createApp({ db, publicBaseUrl: BASE, generateCode: () => seq.shift()! });
@@ -104,7 +115,7 @@ describe('POST /api/links', () => {
     expect(res.body.code).toBe('BBBBBBB');
   });
 
-  it(`returns 500 INTERNAL after ${MAX_CODE_ATTEMPTS} collisions`, async () => {
+  it('returns 500 INTERNAL after 1 attempt + 5 retries all collide (6 calls)', async () => {
     let calls = 0;
     app = createApp({
       db,
@@ -119,7 +130,7 @@ describe('POST /api/links', () => {
     const res = await create('https://b.example');
     expect(res.status).toBe(500);
     expect(res.body.error.code).toBe('INTERNAL');
-    expect(calls).toBe(MAX_CODE_ATTEMPTS);
+    expect(calls).toBe(6);
   });
 });
 

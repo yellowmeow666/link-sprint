@@ -14,7 +14,9 @@ export interface CreateAppOptions {
   publicBaseUrl?: string;
 }
 
-export const MAX_CODE_ATTEMPTS = 5;
+/** 首次尝试 1 次，撞码后最多再重试 5 次，共调用 generateCode 至多 6 次。 */
+export const MAX_CODE_RETRIES = 5;
+export const MAX_CODE_ATTEMPTS = 1 + MAX_CODE_RETRIES;
 
 interface LinkDto {
   code: string;
