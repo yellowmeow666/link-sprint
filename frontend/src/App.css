@@ -1,0 +1,182 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px 72px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+}
+
+.lede,
+.muted {
+  color: var(--muted);
+}
+
+.lede {
+  margin: 0 0 28px;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+}
+
+label,
+.item-label {
+  font-weight: 650;
+}
+
+.form-row {
+  display: grid;
+  gap: 12px;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cfc3b0;
+  background: #fff;
+  color: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: var(--accent-strong);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid #f0b429;
+  outline-offset: 2px;
+}
+
+.error {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.result {
+  margin-top: 16px;
+}
+
+.result h2,
+.list h2 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.result-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.short-url,
+.item-short,
+.item-original {
+  word-break: break-all;
+}
+
+.short-url {
+  flex: 1;
+  font-weight: 650;
+}
+
+.copy-button {
+  flex: none;
+  background: transparent;
+  color: var(--accent-strong);
+  border: 1px solid var(--accent);
+}
+
+.copy-button:hover:not(:disabled) {
+  background: #e7f4f2;
+}
+
+.copied {
+  margin: 10px 0 0;
+  color: var(--accent-strong);
+  font-weight: 650;
+}
+
+.list {
+  margin-top: 28px;
+}
+
+.list-panel .muted {
+  margin: 0;
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: grid;
+  gap: 6px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.item-line,
+.item-time {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  align-items: baseline;
+}
+
+.item-label {
+  flex: none;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.item-time {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}

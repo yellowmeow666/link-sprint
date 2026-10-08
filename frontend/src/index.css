@@ -1,0 +1,36 @@
+:root {
+  color-scheme: light;
+  --bg: #f3efe6;
+  --ink: #1f1a14;
+  --muted: #6b6258;
+  --line: #e2d8c8;
+  --card: #fffdf9;
+  --accent: #0b6e63;
+  --accent-strong: #08574e;
+  --danger: #8f2d22;
+  --danger-bg: #fdecea;
+  --shadow: 0 12px 40px rgba(60, 40, 10, 0.06);
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, #fff8ea, transparent 42%),
+    var(--bg);
+  color: var(--ink);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: var(--accent-strong);
+}
