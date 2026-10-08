@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.env
+.env.*
+backend/data/
+*.db
+*.db-journal
+playwright-report/
+test-results/
+.DS_Store
+.vite/
